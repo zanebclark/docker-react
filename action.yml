@@ -1,0 +1,17 @@
+# action.yml
+name: 'Docker React CI Action'
+description: 'This is my description'
+inputs: 
+    who-to-greet: # id of input
+        description: 'Who to greet'
+        required: true
+        default: 'world'
+outputs: 
+    time: # id of output
+        description: 'Timestamp of the run.'
+
+runs:
+    using: 'docker-compose'
+    image: 'Dockerfile'
+    args:
+        - ${{ inputs.who-to-greet }} # Do this to pass arguments to Dockerfile
