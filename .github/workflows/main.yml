@@ -14,4 +14,4 @@ jobs:
       - name: Check logs
         run: docker logs backend
       - name: Run test suite
-        run: docker exec -e CI=true backend npm run test -- --coverage
+        run: docker exec -e CI=true test npm run test -- --coverage

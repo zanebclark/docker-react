@@ -1,14 +1,23 @@
-version: "3"
+version: "3.4"
 services:
     backend:
         container_name: backend
         build: .
+        stdin_open: true
+        tty: true
+        ports: 
+            - "8080:80"
+    test: 
+        container_name: test
+        build: 
+            context: .
+            target: builder
         # environment: 
         #     - CI=true
         stdin_open: true
         tty: true
         ports: 
             - "3000:3000"
-        # command: ["npm","run","test"]
+        command: ["npm","run","test"]
 
 
