@@ -11,3 +11,20 @@ docker-compose up
 docker run -it frontend npm run test
 docker exec -it 53f58082eb7e npm run test
 docker attach CONTAINER_ID 
+
+Git Stuff:
+========================================================
+echo "# docker-react" >> README.md
+git init
+git add .
+git commit -m "initial commit"
+git remote add origin git@github.com:zanebclark/docker-react.git
+git push -u origin master
+
+ssh-keygen -t rsa -b 4096 -C "zanebclark@gmail.com"
+Passphrase: s3cure4sure
+eval $(ssh-agent -s)
+ssh-add ~/.ssh/id_rsa
+clip < ~/.ssh/id_rsa.pub
+ssh-keygen -lf ~/.ssh/id_rsa.pub
+ssh -T git@github.com
