@@ -45,12 +45,14 @@ jobs:
     needs: my_ci_pipeline
 
     steps:
-      # - name: Configure AWS CLI
-      #   uses: aws-actions/configure-aws-credentials@v1
-      #   with:
-      #     aws-access-key-id: ${{ secrets.MY_AWS_ACCESS_KEY }}
-      #     aws-secret-access-key: ${{ secrets.MY_AWS_SECRET_KEY }}
-      #     aws-region: ${{ env.AWS_REGION_NAME }}
+      - name: Configure AWS CLI
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.MY_AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.MY_AWS_SECRET_KEY }}
+        run: |
+          aws configure \
+          --region ${{ env.AWS_REGION_NAME }} \
+          --output "json"
 
       - name: Create new Elastic Beanstalk application version
         run: |
