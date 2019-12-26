@@ -7,6 +7,9 @@
 # Made by Zane Clark
 # ----------------------------------------------------------------------------
 name: CI-Pipeline-to-AWS-ElasticBeanstalk
+
+on: [push, pull_request]
+
 env:
   EB_PACKAGE_S3_BUCKET_NAME : "elasticbeanstalk-us-east-1-057283593447"
   EB_APPLICATION_NAME       : "docker-react"
@@ -14,10 +17,11 @@ env:
   DEPLOY_PACKAGE_NAME       : "docker-react-app-${{ github.sha }}.zip"
   AWS_REGION_NAME           : "us-east-1"
 
-on: 
-  push:
-    branches:
-      -master
+# on: 
+#   push:
+#     branches:
+#       -master
+
 jobs:
   my_ci_pipeline:
     runs-on: ubuntu-latest
