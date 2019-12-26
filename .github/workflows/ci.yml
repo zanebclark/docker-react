@@ -62,7 +62,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.MY_AWS_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.MY_AWS_SECRET_KEY }}
           AWS_DEFAULT_REGION: ${{ env.AWS_REGION_NAME }}
-        run: aws elasticbeanstalk describe-application-versions --application-name docker-react --version-label "Ver=${{ github.sha }}"
+        run: aws elasticbeanstalk describe-application-versions --application-name docker-react
 
       - name: Deploy our new Application Version
         env:
