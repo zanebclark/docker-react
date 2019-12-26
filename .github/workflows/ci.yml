@@ -57,6 +57,13 @@ jobs:
             --version-label "Ver-${{ github.sha }}" \
             --description "CommitSHA-${{ github.sha }}" 
 
+      - name: List application versions
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.MY_AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.MY_AWS_SECRET_KEY }}
+          AWS_DEFAULT_REGION: ${{ env.AWS_REGION_NAME }}
+        run: aws elasticbeanstalk describe-application-versions --application-name docker-react --version-label "Ver=${{ github.sha }}"
+
       - name: Deploy our new Application Version
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.MY_AWS_ACCESS_KEY }}
@@ -64,12 +71,6 @@ jobs:
           AWS_DEFAULT_REGION: ${{ env.AWS_REGION_NAME }}
         run: aws elasticbeanstalk update-environment --environment-name ${{env.EB_ENVIRONMENT_NAME}} --version-label "Ver=${{ github.sha }}"
 
-      - name: List application versions
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.MY_AWS_ACCESS_KEY }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.MY_AWS_SECRET_KEY }}
-          AWS_DEFAULT_REGION: ${{ env.AWS_REGION_NAME }}
-        run: aws elasticbeanstalk describe-application-versions --application-name docker-react --version-label "Ver=${{ github.sha }}"
 
       - name: Print a nice message upon completion
         run: echo "CD Pipeline Complete"
